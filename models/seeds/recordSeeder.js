@@ -32,6 +32,7 @@ db.once('open', () => {
     )
     .then(() => {
       console.log('recordSeeds done.')
+      process.exit() // 自動跳轉到下個命令欄 不用再ctrl+c
     })
     .catch(error => console.log(error))
 })
