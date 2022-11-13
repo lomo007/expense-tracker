@@ -2,13 +2,13 @@
   "results": [
     {
       "name": "廣志",
-      "email": "guan@example.com",
-      "password": "123"
+      "email": "user1@example.com",
+      "password": "12345678"
     },
     {
       "name": "小新",
-      "email": "xin@example.com",
-      "password": "123"
+      "email": "user2@example.com",
+      "password": "12345678"
     }
   ]
 }
