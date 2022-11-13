@@ -1,0 +1,39 @@
+{
+  "results": [
+    {
+      "name": "午餐",
+      "date": "2021-04-23",
+      "amount": 60,
+      "categoryId": "餐飲食品",
+      "userId": "廣志"
+    },
+    {
+      "name": "晚餐",
+      "date": "2021-04-23",
+      "amount": 60,
+      "categoryId": "餐飲食品",
+      "userId": "廣志"
+    },
+    {
+      "name": "捷運",
+      "date": "2021-04-23",
+      "amount": 120,
+      "categoryId": "交通出行",
+      "userId": "廣志"
+    },
+    {
+      "name": "電影:驚奇隊長",
+      "date": "2021-04-23",
+      "amount": 220,
+      "categoryId": "休閒娛樂",
+      "userId": "小新"
+    },
+    {
+      "name": "租金",
+      "date": "2015-04-01",
+      "amount": 25000,
+      "categoryId": "家居物業",
+      "userId": "廣志"
+    }
+  ]
+}
