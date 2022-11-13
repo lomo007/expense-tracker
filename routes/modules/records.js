@@ -59,7 +59,6 @@ router.post('/new', (req, res) => {
 router.get('/:id/edit', (req, res) => {
   const userId = req.user._id
   const id = req.params.id
-  console.log(userId, id)
   return Record.findOne({ userId })
     .populate('categoryId', { name: true })
     .lean()
