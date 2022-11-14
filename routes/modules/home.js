@@ -6,7 +6,7 @@ const Record = require('../../models/record')
 // 渲染現有資料到首頁  //*1 根據 _id 升冪排序
 router.get('/', (req, res) => {
   const userId = req.user._id
-  Record.find({ userId })
+  return Record.find({ userId })
     .populate('categoryId', { icon: true })
     .lean()
     .sort({ date: 'desc' }) //* 1
@@ -14,12 +14,13 @@ router.get('/', (req, res) => {
       let totalAmount = 0
       if (record.length) {
         record.forEach(amounts => {
+          console.log(amounts)
           amounts.date = amounts.date.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' })
           totalAmount += amounts.amount
         })
-        res.render('index', { record, totalAmount })
+        return res.render('index', { record, totalAmount })
       } else {
-        res.render('noRecordindex', { totalAmount })
+        return res.render('noRecordindex', { totalAmount })
       }
     })
     .catch(error => console.error(error))

@@ -18,9 +18,11 @@ db.once('open', () => {
     Promise.all(recordSeeds.map((record) => {
       const { name, date, amount, categoryId, userId } = record
       return Category.findOne({ name: categoryId })
+        .lean()
         .then(category => {
           const categoryId = category._id
           return User.findOne({ name: userId })
+            .lean()
             .then(user => {
               const userId = user._id
               return Record.create({ name, date, amount, categoryId, userId })
