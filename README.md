@@ -17,52 +17,62 @@
 
 1. 請先確認有安裝 node.js 與 npm
 2. 將專案 clone 到本地
-3. 在本地開啟之後，透過終端機進入資料夾，輸入:
-
    ```bash
-   cd restaurant_list
+   git clone https://github.com/lomo007/expense-tracker.git
    ```
-4. 再輸入 npm install，載入node_modules
-
+3. 在本地開啟之後，透過終端機進入資料夾，輸入:
+   ```bash
+   cd expense-tracker
+   ```
+4. 輸入 npm install，載入node_modules
    ```bash
    npm install
    ```
-5. 新增.env檔案輸入環境參數，或是於本地新增:
 
+5. 在expense-tracker資料夾下新增.env檔案，在檔案內新增環境參數，或是於本地新增:
    ```bash
-   MONGODB_URI='Your MongoDB Account String'
+   MONGODB_URI=      #Your MongoDB Account String
+   SESSION_SECRET=    #自訂義 eg:ThisIsHisSecret
+   PORT=3000
+   FACEBOOK_ID=       #FACEBOOK_ID=Meta for developers 應用程式編號
+   FACEBOOK_SECRET=    #FACEBOOK_SECRET=Meta for developers 應用程式密鑰
+   FACEBOOK_CALLBACK=http://localhost:3000/auth/facebook/callba
    ```
 
-6. 進入資料夾後，輸入'npm run seed' 載入種子資料:
-
+6. 載入種子資料。終端機出現'mongodb connected'表示伺服器連線成功。'...done'表示種子資料載入成功。
    ```bash
    npm run seed
    ```
 
-7. 若看見'mongodb connected'表示伺服器連線成功。若看見'done'表示種子資料載入成功。
-
-8. 接著輸入'npm run dev'執行渲染畫面:
-
+7. 執行渲染畫面:
    ```bash
    npm run dev
    ```
 
-9. 若看見"Express is listening on http://localhost:3000"
-   則代表順利運行，打開瀏覽器進入到以下網址:
-
+8. 終端機出現"Express is listening on http://localhost:3000" 則代表順利運行，打開瀏覽器到以下網址:
    ```bash
    http://localhost:3000
    ```
 
-10. 若欲暫停使用
-
+9. 暫停使用
    ```bash
    ctrl + c
    ```
 
+10. 測試帳號
+   ```bash
+   "name": "廣志",
+   "email": "user1@example.com",      
+   "password": "12345678"
+   
+   "name": "小新",
+   "email": "user2@example.com",
+   "password": "12345678"
+   ```
+
 ## 開發工具
 
-- Node.js 14.16.0
+- Node.js 12.12.0
 - Express 4.16.4
 - Express-Handlebars 3.0.0
 - Bootstrap 5.0.2
@@ -76,5 +86,3 @@
 - passport 0.4.1
 - passport-facebook 3.0.0
 - passport-local 1.0.0
-
-
