@@ -23,7 +23,7 @@ db.once('open', () => {
           return User.findOne({ name: userId })
             .then(user => {
               const userId = user._id
-              Record.create({ name, date, amount, categoryId, userId })
+              return Record.create({ name, date, amount, categoryId, userId })
             })
             .catch(error => console.log(error))
         })
