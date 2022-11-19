@@ -4,7 +4,6 @@ const router = express.Router()
 // 引用 model
 const Record = require('../../models/record')
 const Category = require('../../models/category')
-const record = require('../../models/record')
 
 router.get('/search', (req, res) => {
   const userId = req.user._id
@@ -23,9 +22,9 @@ router.get('/search', (req, res) => {
               amounts.date = amounts.date.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' })
               totalAmount += amounts.amount
             })
-            res.render('index', { record, totalAmount })
+            res.render('index', { record, totalAmount, categorySort })
           } else {
-            res.render('noRecordindex', { totalAmount })
+            res.render('noRecordindex', { totalAmount, categorySort })
           }
         })
         .catch(error => console.error(error))

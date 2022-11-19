@@ -14,13 +14,12 @@ router.get('/', (req, res) => {
       let totalAmount = 0
       if (record.length) {
         record.forEach(amounts => {
-          console.log(amounts)
           amounts.date = amounts.date.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' })
           totalAmount += amounts.amount
         })
-        return res.render('index', { record, totalAmount })
+        return res.render('index', { record, totalAmount, categorySort: '全部' })
       } else {
-        return res.render('noRecordindex', { totalAmount })
+        return res.render('noRecordindex', { totalAmount, categorySort: '全部' })
       }
     })
     .catch(error => console.error(error))

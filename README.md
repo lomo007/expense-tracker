@@ -46,7 +46,7 @@
 
 7. 執行渲染畫面:
    ```bash
-   npm run dev
+   npm run start
    ```
 
 8. 終端機出現"Express is listening on http://localhost:3000" 則代表順利運行，打開瀏覽器到以下網址:

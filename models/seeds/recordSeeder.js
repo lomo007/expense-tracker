@@ -2,39 +2,46 @@ const bcrypt = require('bcryptjs')
 const Category = require('../category')
 const Record = require('../record')
 const User = require('../user')
-const recordSeeds = require('../../record.json').results
-const userSeeds = require('../../user.json').results
+const { records, users } = require('./data')
 const db = require('../../config/mongoose')
 
-// 連線成功
-// 匯入使用者種子資料並加鹽
-db.once('open', () => {
-  Promise.all([
-    userSeeds.map(user => {
-      user.password = bcrypt.hashSync(user.password, 10)
-      return User.create(user)
-    }),
-    // 匯入Record 加上userId categoryI
-    Promise.all(recordSeeds.map((record) => {
-      const { name, date, amount, categoryId, userId } = record
-      return Category.findOne({ name: categoryId })
-        .lean()
-        .then(category => {
-          const categoryId = category._id
-          return User.findOne({ name: userId })
-            .lean()
-            .then(user => {
-              const userId = user._id
-              return Record.create({ name, date, amount, categoryId, userId })
-            })
-            .catch(error => console.log(error))
+db.once('open', async () => {
+  console.log('Seeds start.')
+
+  try {
+    const categories = await Category.find().lean()
+
+    await Promise.all(
+      users.map(async user => {
+        const { name, email, password, recordIndex } = user
+        // recordIndex seperate data
+
+        const userCreated = await User.create({
+          name,
+          email,
+          password: bcrypt.hashSync(password, 10)
         })
-        .catch(error => console.log(error))
-    })
+        // user model
+
+        const recordData = recordIndex.map(index => {
+          const record = records[index]
+          const categoriesData = categories.find(
+            element => record.category === element.name
+          )
+          record.categoryId = categoriesData._id
+          record.userId = userCreated._id
+          delete record.category
+          return record
+        })
+        await Record.insertMany(recordData)
+        // arrange records and create model
+      })
     )
-  ]).then(() => {
-    console.log('recordSeeds done.')
-    process.exit() // 自動跳轉到下個命令欄 不用再ctrl+c
-  })
-    .catch(error => console.log(error))
+    console.log('Seeds end.')
+    db.close()
+  } catch (error) {
+    console.log(error)
+  } finally {
+    process.exit()
+  }
 })
