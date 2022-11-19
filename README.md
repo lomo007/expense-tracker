@@ -86,3 +86,4 @@
 - passport 0.4.1
 - passport-facebook 3.0.0
 - passport-local 1.0.0
+- dayjs ^1.11.6

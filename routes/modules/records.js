@@ -4,6 +4,7 @@ const router = express.Router()
 // 引用 model
 const Record = require('../../models/record')
 const Category = require('../../models/category')
+const dayjs = require('dayjs')
 
 router.get('/search', (req, res) => {
   const userId = req.user._id
@@ -19,7 +20,7 @@ router.get('/search', (req, res) => {
           let totalAmount = 0
           if (record.length) {
             record.forEach(amounts => {
-              amounts.date = amounts.date.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' })
+              amounts.date = dayjs(amounts.date).format('YYYY-MM-DD')
               totalAmount += amounts.amount
             })
             res.render('index', { record, totalAmount, categorySort })
@@ -62,7 +63,7 @@ router.get('/:id/edit', (req, res) => {
     .populate('categoryId', { name: true })
     .lean()
     .then((record) => {
-      record.date = record.date.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-') // 把/替换成'-'
+      record.date = dayjs(record.date).format('YYYY-MM-DD')
       res.render('edit', { record })
     })
     .catch(error => console.error(error))
